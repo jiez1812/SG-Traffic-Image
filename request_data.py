@@ -1,14 +1,17 @@
-import requests
-import json
+import requests, json, shutil, datetime
 
 class traffic_data_requests():
-    def __init__(self, date_time):
+    def __init__(self):
         self.base_url = r'https://api.data.gov.sg/v1/transport/traffic-images?date_time='
-        self.date_time = date_time.replace(':', '%3A')
-        self.concate_url = self.base_url + self.date_time
+
+    def generate_datetime_now(self):
+        nowdt = datetime.datetime.now()
+        return nowdt.strftime('%Y-%m-%dT%H%3A%M%3A%S')
+
+    def generate_request_url(self, strdt):
+        return self.base_url + strdt
 
     def request_json(self):
-        return requests.get(self.concate_url)
-
-    def select_camera(self, traffic_json):
-        pass
+        strdt = self.generate_datetime_now()
+        request_url = self.generate_request_url(strdt)
+        return requests.get(request_url)
