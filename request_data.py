@@ -15,14 +15,15 @@ class traffic_data_requests():
 
     def generate_datetime_now(self):
         nowdt = datetime.datetime.now()
-        return nowdt.strftime('%Y-%m-%dT%H%3A%M%3A%S')
+        strdt = nowdt.strftime('%Y-%m-%dT%H:%M:%S')
+        return strdt.replace(':','%3A')
 
     def generate_request_url(self, strdt):
         return self.base_url + strdt
 
     def request_json(self):
         self.strdt = self.generate_datetime_now()
-        request_url = self.generate_request_url(strdt)
+        request_url = self.generate_request_url(self.strdt)
         return requests.get(request_url)
 
     def get_data(self):
@@ -44,3 +45,10 @@ class traffic_data_requests():
                 with open(image_path, 'wb') as f:
                     stream_image.raw.decode_content = True
                     shutil.copyfileobj(stream_image.raw, f)
+
+    def run(self):
+        self.get_images()
+
+if __name__ == '__main__':
+    app = traffic_data_requests()
+    app.run()

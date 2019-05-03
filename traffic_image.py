@@ -1,3 +1,0 @@
-from request_data import traffic_data_requests
-
-traffic_data_requests()
