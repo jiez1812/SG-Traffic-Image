@@ -40,7 +40,7 @@ class traffic_data_requests():
             cam_id = camera['camera_id']
             if cam_id in self.request_cameras.keys():
                 stream_image = requests.get(camera['image'], stream=True)
-                image_file_name = cam_id + self.strdt.replace('%3A','') + '.jpg'
+                image_file_name = self.request_cameras[cam_id] + ' ' + self.strdt.replace('%3A','') + '.jpg'
                 image_path = self.image_folder_path + image_file_name
                 with open(image_path, 'wb') as f:
                     stream_image.raw.decode_content = True
