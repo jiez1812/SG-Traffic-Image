@@ -1,116 +1,156 @@
-# Singapore Traffic Image Downloader
+# Singapore Traffic Monitor - Web App
 
-A Python script that automatically downloads traffic camera images from Singapore's Data.gov.sg API for border checkpoint monitoring.
-
-## Overview
-
-This tool fetches real-time traffic images from selected cameras at Singapore's border checkpoints (Woodlands and Tuas) using the official [Data.gov.sg Traffic Images API](https://data.gov.sg/dataset/traffic-images). Images are automatically saved with timestamps for monitoring and archival purposes.
+A modern, real-time web application for monitoring traffic conditions at Singapore's Woodlands and Tuas customs checkpoints. Built with Next.js 15, React 19, and Tailwind CSS.
 
 ## Features
 
-- Real-time traffic image retrieval from Singapore's government API
-- Automatic timestamp generation and formatting
-- Saves images with descriptive names including location and timestamp
-- Monitors 6 strategic camera locations at border checkpoints
+- **Real-time Updates**: Automatically fetches and displays traffic images every 20 seconds
+- **Dual Theme Support**:
+  - Automatically follows system theme (dark/light)
+  - Manual theme toggle for user preference
+- **Responsive Design**:
+  - Desktop: Side-by-side 2-column layout
+  - Mobile: Toggle between Woodlands and Tuas views
+- **Modern & Minimalist UI**: Clean interface with smooth transitions
+- **Live Status Indicator**: Visual feedback showing auto-refresh status
 
-## Monitored Camera Locations
+## Monitored Locations
 
-| Camera ID | Location |
-|-----------|----------|
-| 2702 | Woodlands Custom |
-| 2701 | First Link |
-| 4713 | Tuas Custom |
-| 4703 | Second Link |
-| 4712 | Before Tuas Custom |
-| 2704 | Before Woodlands Custom |
+### Woodlands Customs
+- **Camera 2704**: Before Woodlands Customs
+- **Camera 2702**: Woodlands Customs
+- **Camera 2701**: Woodlands Checkpoint (First Link)
 
-## Requirements
+### Tuas Customs
+- **Camera 4712**: Before Tuas Customs
+- **Camera 4713**: Tuas Customs
+- **Camera 4703**: Tuas Checkpoint (Second Link)
 
-- Python 3.x
-- Required Python packages:
-  - `requests`
-  - `shutil` (built-in)
-  - `json` (built-in)
-  - `datetime` (built-in)
+## Technology Stack
 
-## Installation
+- **Framework**: Next.js 15 (App Router)
+- **UI Library**: React 19
+- **Styling**: Tailwind CSS
+- **Language**: TypeScript
+- **Data Source**: Data.gov.sg Traffic Images API
 
-1. Clone this repository:
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18.x or higher
+- npm or yarn package manager
+
+### Installation
+
+1. Navigate to the traffic-app directory:
 ```bash
-git clone https://github.com/jiez1812/SG-Traffic-Image.git
-cd SG-Traffic-Image
+cd traffic-app
 ```
 
-2. Install required dependencies:
+2. Install dependencies:
 ```bash
-pip install requests
+npm install
 ```
 
-3. Ensure the `traffic images/` directory exists (it will be created automatically if it doesn't exist):
+3. Run the development server:
 ```bash
-mkdir -p "traffic images"
+npm run dev
 ```
 
-## Usage
-
-Run the script directly:
-
-```bash
-python request_data.py
+4. Open your browser and visit:
+```
+http://localhost:3000
 ```
 
-The script will:
-1. Query the Data.gov.sg API for current traffic camera images
-2. Filter for the specified camera locations
-3. Download and save images to the `traffic images/` folder
-4. Name each image with format: `[Location] [Timestamp].jpg`
+### Production Build
 
-### Example Output
-
-Images are saved with names like:
-- `Woodlands Custom 2019-07-05T143022.jpg`
-- `First Link 2019-07-05T143022.jpg`
-- `Tuas Custom 2019-07-05T143022.jpg`
-
-## Code Structure
-
-The main class `traffic_data_requests` contains the following methods:
-
-- `__init__()`: Initialize API endpoint and camera configuration
-- `generate_datetime_now()`: Generate current timestamp in API-compatible format
-- `generate_request_url(strdt)`: Build API request URL with timestamp
-- `request_json()`: Make HTTP request to the API
-- `get_data()`: Parse JSON response from API
-- `get_cameras()`: Extract camera data from API response
-- `get_images()`: Download images from specified cameras
-- `run()`: Main execution method
-
-## API Reference
-
-This script uses the [Singapore Government Traffic Images API](https://api.data.gov.sg/v1/transport/traffic-images):
-- Endpoint: `https://api.data.gov.sg/v1/transport/traffic-images`
-- Parameter: `date_time` (ISO 8601 format)
-
-## Scheduling
-
-To run this script periodically (e.g., every 5 minutes), you can set up a cron job:
+To create an optimized production build:
 
 ```bash
-# Edit crontab
-crontab -e
-
-# Add this line to run every 5 minutes
-*/5 * * * * cd /path/to/SG-Traffic-Image && python request_data.py
+npm run build
+npm start
 ```
+
+## Project Structure
+
+```
+traffic-app/
+├── app/
+│   ├── api/
+│   │   └── traffic/
+│   │       └── route.ts          # API endpoint for fetching traffic data
+│   ├── globals.css               # Global styles
+│   ├── layout.tsx                # Root layout
+│   └── page.tsx                  # Main page component
+├── components/
+│   ├── CameraImage.tsx           # Camera image display component
+│   ├── ThemeProvider.tsx         # Theme context provider
+│   └── ThemeToggle.tsx           # Theme toggle button
+├── public/                       # Static assets
+├── next.config.ts                # Next.js configuration
+├── tailwind.config.ts            # Tailwind CSS configuration
+├── tsconfig.json                 # TypeScript configuration
+└── package.json                  # Project dependencies
+```
+
+## Features Breakdown
+
+### Auto-Refresh
+The application automatically fetches new traffic images every 20 seconds, ensuring users always see the most current traffic conditions.
+
+### Theme System
+- **System Detection**: Automatically detects and applies your device's theme preference
+- **Manual Toggle**: Click the sun/moon icon to manually switch between light and dark themes
+- **Persistence**: Your theme preference is saved in local storage
+
+### Responsive Layout
+- **Desktop (≥768px)**: Two-column layout showing both Woodlands and Tuas simultaneously
+- **Mobile (<768px)**: Toggle buttons to switch between Woodlands and Tuas views
+
+### Camera Display
+Each camera feed shows:
+- Location name
+- Camera ID
+- Live traffic image
+- Last update timestamp
+- Loading state with spinner
+- Error handling for failed image loads
+
+## API Integration
+
+The app uses an internal API route (`/api/traffic`) that:
+1. Fetches data from Singapore's Data.gov.sg API
+2. Filters for the 6 specific camera locations
+3. Returns formatted data with timestamps
+4. Implements error handling and caching strategies
+
+## Performance Optimizations
+
+- Server-side API caching disabled for real-time data
+- Next.js Image component for optimized image loading
+- Lazy loading and efficient re-rendering
+- Minimal bundle size with tree-shaking
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
 ## License
 
 This project is open source. Please ensure compliance with Data.gov.sg's [Terms of Use](https://data.gov.sg/privacy-and-website-terms) when using the API.
 
+## Data Source
+
+Traffic images are provided by [Data.gov.sg](https://data.gov.sg) through their Traffic Images API.
+
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit issues or pull requests.
 
 ## Disclaimer
 
-This tool is for personal use and monitoring purposes. Please be mindful of API rate limits and respect the Data.gov.sg terms of service.
+This application is for personal monitoring purposes. Please respect API rate limits and Data.gov.sg terms of service.
