@@ -33,7 +33,6 @@ export async function GET() {
     const now = new Date();
     const sgTime = new Date(now.getTime() + 8 * 60 * 60 * 1000);
     const dateTime = sgTime.toISOString().split('.')[0];
-    console.log('Fetching traffic data for:', dateTime);
 
     const response = await fetch(
       `https://api.data.gov.sg/v1/transport/traffic-images?date_time=${dateTime}`,
