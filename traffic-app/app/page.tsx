@@ -133,7 +133,16 @@ export default function Home() {
                 </div>
               </div>
               <div className="text-gray-600 dark:text-gray-400">
-                Last updated: {lastUpdate.toLocaleTimeString('en-SG')}
+                Last updated: {lastUpdate.toLocaleString('en-SG', {
+                  timeZone: 'Asia/Singapore',
+                  year: 'numeric',
+                  month: 'short',
+                  day: '2-digit',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  second: '2-digit',
+                  hour12: true,
+                })}
               </div>
             </div>
           </div>
