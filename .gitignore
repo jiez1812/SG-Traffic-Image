@@ -1,1 +1,12 @@
 traffic images/
+
+# NextJS
+traffic-app/node_modules/
+traffic-app/.next/
+traffic-app/out/
+traffic-app/build/
+traffic-app/.DS_Store
+traffic-app/*.log
+traffic-app/.env*.local
+traffic-app/.vercel
+traffic-app/.turbo

@@ -1,10 +1,36 @@
 # Singapore Traffic Image Downloader
 
-A Python script that automatically downloads traffic camera images from Singapore's Data.gov.sg API for border checkpoint monitoring.
+A comprehensive toolkit for monitoring Singapore's border checkpoint traffic, featuring both a Python downloader script and a modern web application.
 
 ## Overview
 
-This tool fetches real-time traffic images from selected cameras at Singapore's border checkpoints (Woodlands and Tuas) using the official [Data.gov.sg Traffic Images API](https://data.gov.sg/dataset/traffic-images). Images are automatically saved with timestamps for monitoring and archival purposes.
+This project provides two ways to monitor real-time traffic at Singapore's border checkpoints (Woodlands and Tuas) using the official [Data.gov.sg Traffic Images API](https://data.gov.sg/dataset/traffic-images):
+
+1. **Python Script**: Automatically downloads and saves traffic camera images with timestamps
+2. **Web Application**: Modern, responsive web interface with real-time updates every 20 seconds
+
+## 🌐 Web Application (NEW!)
+
+A modern Next.js web app with real-time traffic monitoring capabilities. [View detailed documentation](./traffic-app/README.md)
+
+### Key Features
+- **Live Updates**: Auto-refresh every 20 seconds
+- **Dark/Light Theme**: Automatic system detection + manual toggle
+- **Responsive Design**: 2-column desktop layout, toggle view for mobile
+- **Modern UI**: Minimalist design built with Next.js 15, React 19, and Tailwind CSS
+
+### Quick Start
+```bash
+cd traffic-app
+npm install
+npm run dev
+```
+
+Visit `http://localhost:3000` to view the application.
+
+## 🐍 Python Script
+
+Fetches real-time traffic images from selected cameras at Singapore's border checkpoints. Images are automatically saved with timestamps for monitoring and archival purposes.
 
 ## Features
 
