@@ -1,4 +1,7 @@
+node_modules/
+.DS_Store
 traffic images/
+.next/
 
 # NextJS
 traffic-app/node_modules/
