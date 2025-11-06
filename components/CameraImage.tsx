@@ -16,10 +16,15 @@ export default function CameraImage({ cameraId, imageUrl, location, timestamp }:
 
   const formatTime = (isoString: string) => {
     const date = new Date(isoString);
-    return date.toLocaleTimeString('en-SG', {
+    return date.toLocaleString('en-SG', {
+      timeZone: 'Asia/Singapore',
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
+      hour12: true,
     });
   };
 
