@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import { formatSingaporeTime } from '@/lib/timezone';
 
 interface CameraImageProps {
   cameraId: string;
@@ -13,20 +14,6 @@ interface CameraImageProps {
 export default function CameraImage({ cameraId, imageUrl, location, timestamp }: CameraImageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
-
-  const formatTime = (isoString: string) => {
-    const date = new Date(isoString);
-    return date.toLocaleString('en-SG', {
-      timeZone: 'Asia/Singapore',
-      year: 'numeric',
-      month: 'short',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: true,
-    });
-  };
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
@@ -69,7 +56,7 @@ export default function CameraImage({ cameraId, imageUrl, location, timestamp }:
 
       <div className="p-3 bg-gray-50 dark:bg-gray-700 border-t border-gray-200 dark:border-gray-600">
         <p className="text-sm text-gray-600 dark:text-gray-300">
-          Last updated: {formatTime(timestamp)}
+          Last updated: {formatSingaporeTime(timestamp)}
         </p>
       </div>
     </div>
