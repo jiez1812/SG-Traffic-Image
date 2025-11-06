@@ -1,10 +1,6 @@
-# Singapore Traffic Monitor - Web Application
+# Singapore Traffic Monitor - Web App
 
 A modern, real-time web application for monitoring traffic conditions at Singapore's Woodlands and Tuas customs checkpoints. Built with Next.js 15, React 19, and Tailwind CSS.
-
-## Overview
-
-This web application provides real-time monitoring of traffic at Singapore's border checkpoints (Woodlands and Tuas) using the official [Data.gov.sg Traffic Images API](https://data.gov.sg/dataset/traffic-images). The app automatically refreshes every 20 seconds to display the latest traffic conditions.
 
 ## Features
 
@@ -47,28 +43,22 @@ This web application provides real-time monitoring of traffic at Singapore's bor
 
 ### Installation
 
-1. Clone this repository:
-```bash
-git clone https://github.com/jiez1812/SG-Traffic-Image.git
-cd SG-Traffic-Image
-```
-
-2. Navigate to the traffic-app directory:
+1. Navigate to the traffic-app directory:
 ```bash
 cd traffic-app
 ```
 
-3. Install dependencies:
+2. Install dependencies:
 ```bash
 npm install
 ```
 
-4. Run the development server:
+3. Run the development server:
 ```bash
 npm run dev
 ```
 
-5. Open your browser and visit:
+4. Open your browser and visit:
 ```
 http://localhost:3000
 ```
@@ -164,7 +154,3 @@ Contributions are welcome! Please feel free to submit issues or pull requests.
 ## Disclaimer
 
 This application is for personal monitoring purposes. Please respect API rate limits and Data.gov.sg terms of service.
-
----
-
-**Note**: This branch contains only the Next.js web application. For the Python script version, please check the main branch.
