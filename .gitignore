@@ -1,4 +1,6 @@
 traffic images/
+.next/
+node_modules/
 
 # NextJS
 traffic-app/node_modules/
